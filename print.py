@@ -4,6 +4,7 @@ import loadconfig
 from PIL import Image
 from urllib.request import urlretrieve
 from urllib.parse import urlparse
+from threading import Thread
 
 
 def get_filename(url_address):
@@ -40,10 +41,12 @@ if file_color_mode(current_filename) != "CMYK":
     translate_image(current_filename, new_filename)
     print ("File successfully converted")
     file_color_mode(new_filename)
-    print_file(new_filename)
+    # Новый поток нужен для того чтобы после закрытия основной программы
+    # не закрывалось окно печати
+    print_new_file = Thread(target=print_file(new_filename))
+    print_new_file.start()
 else:
-    print_file(current_filename)
+    print_current_file = Thread(target=print_file(current_filename))
+    print_current_file.start()
     file_color_mode(current_filename)
-
-input("Press enter to exit")
 

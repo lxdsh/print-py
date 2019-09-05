@@ -4,11 +4,10 @@ Requirements
 Python 3.7
 PIP
 
-modules : 
-
-pip install keyboard
+Modules : 
 
 pip install Pillow
+
 
 
 Created with &hearts; by Afgan Khalilov & David Sitnikov
